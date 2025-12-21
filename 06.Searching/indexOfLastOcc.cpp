@@ -7,7 +7,7 @@ int lastOcc(int arr[], int n, int low, int high, int key)
     {
         int mid = low + (high - low) / 2;
         if (arr[mid] == key)
-            if (mid != n - 1 && arr[mid] == arr[mid + 1])
+            if (mid < n && arr[mid] == arr[mid + 1])
             {
                 low = mid + 1;
             }
