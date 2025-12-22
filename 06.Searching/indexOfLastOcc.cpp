@@ -7,7 +7,7 @@ int lastOcc(int arr[], int n, int low, int high, int key)
     {
         int mid = low + (high - low) / 2;
         if (arr[mid] == key)
-            if (mid < n && arr[mid] == arr[mid + 1])
+            if (mid != n - 1 && arr[mid] == arr[mid + 1])
             {
                 low = mid + 1;
             }
@@ -24,8 +24,8 @@ int main()
 {
     int arr[] = {1, 10, 10, 10, 10, 10, 10, 20, 20, 40};
     int low = 0;
-    int n = sizeof(arr) / sizeof(arr[0]) - 1;
-    int high = n;
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int high = n - 1;
     int key;
     cin >> key;
     cout << lastOcc(arr, n, low, high, key);
