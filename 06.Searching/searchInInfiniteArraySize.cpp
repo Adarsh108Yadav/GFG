@@ -13,7 +13,7 @@ int search(int arr[], int key)
             return i;
         low = i + 1;
         i *= 2;
-        high = i;
+        high = i - 1;
     }
     while ( low <= high )
     {

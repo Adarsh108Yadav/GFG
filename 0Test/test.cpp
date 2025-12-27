@@ -3,37 +3,45 @@
 #include <cmath>
 #include <algorithm>
 using namespace std;
-
-bool checkIfExist(vector<int> &arr)
+int bSearch(int arr[], int low, int high, int key)
 {
-    sort(arr.begin(), arr.end());
-    for (int i = 0; i < arr.size() - 1; i++)
+    while (low <= high)
     {
-        int low = i + 1;
-        int high = arr.size() - 1;
-        int key = 2 * arr[i];
-        if ((arr[i] < 0) && (arr[i] & 1) == 0)
-            key = arr[i] / 2;
-        cout << arr[i] << " " << key << endl;
-        while (low <= high)
-        {
-            int mid = low + (high - low) / 2;
-            if (arr[mid] == key)
-                return true;
-            else if (arr[mid] < key)
-                low = mid + 1;
-            else
-                high = mid - 1;
-        }
+        int mid = (low + high) / 2;
+        if (arr[mid] == key)
+            return mid;
+        else if (arr[mid] < key)
+            low = mid + 1;
+        else if (arr[mid] > key)
+            high = mid - 1;
     }
-    return false;
+    return -1;
+}
+
+int checkInRotatedArray(int arr[], int low, int high, int key)
+{
+    int mid = low + (high - low) / 2;
+    if (arr[mid] >= arr[low] && arr[low] <= key && key <= arr[mid])
+    {
+        cout << " y \n";
+        return bSearch(arr, low, mid, key);
+    }
+    else if (arr[mid] <= arr[high] && arr[mid] <= key && key <= arr[high])
+    {
+        cout << " n \n";
+        return bSearch(arr, mid, high, key);
+    }
+    return -2;
 }
 
 int main()
 {
-    vector<int> nums = {102, -592, 457, 802, 98, -132, 883, 356, -857, 461, -453, 522, 250, 476, 991, 540, -852, -485, -637, 999, -803, -691, -880, 881, -584, 750, -124, 745, -909, -892, 304, -814, 868, 665, 50, -40, 26, -242, -797, -360, -918, -741, 88, -933, -93, 360, -738, 833, -191, 563, 449, 840, 806, -87, -950, 508, 74, -448, -815, -488, 639, -334};
-
-    bool k = checkIfExist(nums);
+    int nums[] = {10, 20, 40, 60, 5, 8};
+    int key;
+    int low = 0;
+    int high = sizeof(nums) - 1;
+    cin >> key;
+    int k = checkInRotatedArray(nums, low, high, key);
     cout << k << endl;
     return 0;
 }
