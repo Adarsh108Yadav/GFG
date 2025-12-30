@@ -7,7 +7,8 @@ int peakElement(int arr[], int low, int high)
         return 0;
     if (arr[high] >= arr[high - 1])
         return high;
-    int n = high;
+    low++;
+    high--;
     while (low <= high)
     {
         int mid = low + (high - low) / 2;
